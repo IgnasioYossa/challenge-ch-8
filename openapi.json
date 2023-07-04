@@ -1,0 +1,433 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Challenge chapter 8",
+    "description": "Swagger UI documentation untuk Challenge Chapter 8",
+    "version": "1.0.1"
+    
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000/api/v1"
+    }
+  ],
+  "paths": {
+    "/players": {
+      "get": {
+        "tags": [
+          "Player Routes"
+        ],
+        "summary": "Menampilkan data player",
+        "description": "Endpoint untuk menampilkan data player",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string",
+                        "example": "Ignasio"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "ignasio@yahoo.com"
+                      },
+                      "lvl": {
+                        "type": "integer",
+                        "example": 10
+                      },
+                      "experience": {
+                        "type": "integer",
+                        "example": 99
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Player Routes"
+        ],
+        "summary": "Membuat data player baru",
+        "description": "Endpoint untuk menambah data player baru",
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string",
+                        "example": "Ignasiyow"
+                      },
+                      "password": {
+                        "type": "string",
+                        "example": "yossaasoy"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "ignasiyow@yahoo.com"
+                      },
+                      "experience": {
+                        "type": "integer",
+                        "example": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ketika kolom input kosong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Username or email cannot be empty"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/players/{id}": {
+      "get": {
+        "tags": [
+          "Player Routes"
+        ],
+        "summary": "Menampilkan data player spesifik dari database",
+        "description": "Endpoint untuk menampilkan data player yang telah login",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the player",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string",
+                        "example": "Ignasio"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "ignasio@yahoo.com"
+                      },
+                      "lvl": {
+                        "type": "integer",
+                        "example": 10
+                      },
+                      "experience": {
+                        "type": "integer",
+                        "example": 99
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ketika user dengan id tertentu tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with {id} not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Player Routes"
+        ],
+        "summary": "Update player data",
+        "description": "Endpoint untuk mengupdate data",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID player yang akan diupdate",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with id:{id} successfully updated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Id tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with {id} not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Gagal update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Failed to update"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Player Routes"
+        ],
+        "summary": "Delete player data",
+        "description": "Endpoint untuk delete data",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the player to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with {id}, was deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "FAILED"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot delete Player with {id}, Maybe Player was not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/players/exp/{id}": {
+      "post": {
+        "tags": [
+          "Player Routes"
+        ],
+        "summary": "Update player exp",
+        "description": "Endpoint untuk mengupdate experience point player",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the player to update exp",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "berhasil mengupdate",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with id={id} gain {exp} experience. Total experience = {player.experience}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Exp field tidak boleh kosong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Exp field cannot be empty, Cannot update Player with id=${id}!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ketika user dengan id tertentu tidak ditemukan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player with {id} not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
